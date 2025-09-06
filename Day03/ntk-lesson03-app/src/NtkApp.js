@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NtkFuncComp from './components/NtkFuncComp'
 import NtkClassComp from './components/NtkClassComp'
 import NtkRenderList from './components/NtkRenderList'
+import NtkListStudents from './components/NtkListStudents';
 
 export default class NtkApp extends Component {
   constructor(props){
@@ -31,6 +32,8 @@ export default class NtkApp extends Component {
         <NtkClassComp name="Trực Kiên" age="21" phone="0363789548" email="kienk103@badinh.in"></NtkClassComp>
         <hr/>
         <NtkRenderList/>
+        <hr/>
+        <NtkListStudents students = {this.state.students}/>
       </div>
     )
   }
