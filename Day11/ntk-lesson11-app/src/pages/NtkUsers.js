@@ -33,7 +33,7 @@ export default function NtkUser() {
             <td>{item.password}</td>
             <td>{item.status}</td>
             <td>
-                <Link to={`/users/edit/${item.id}`} className="btn btn-success">
+                <Link to={`/users/edit/${item.id}`} className="btn btn-success me-2">
                         Edit
                 </Link>
                 <a href='/users/add' className='btn btn-primary'>Thêm mới</a>

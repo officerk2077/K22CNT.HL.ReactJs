@@ -9,6 +9,8 @@ import NtkProductDetail from './pages/NtkProductDetail'
 import Ntk404 from './pages/Ntk404'
 import NtkUsers from './pages/NtkUsers';
 import NtkUserAdd from './pages/NtkUserAdd';
+import NtkUserEdit from './pages/NtkUserEdit';
+import NtkCategories from './pages/NtkCategories';
 
 export default function NtkApp() {
   return (
@@ -29,8 +31,10 @@ export default function NtkApp() {
           </Route>
 
           <Route path='/users' element={<NtkUsers/>}> </Route>
-            <Route path="/users/add" element={<NtkUserAdd/>}/>
-          
+          <Route path="/users/add" element={<NtkUserAdd/>}/>
+          <Route path="/users/edit/:id" element={<NtkUserEdit/>}/>
+
+          <Route path='/categories' element={<NtkCategories/>}> </Route>
 
           {/* 404 page */}
           <Route path='*' element={<Ntk404 />}/>

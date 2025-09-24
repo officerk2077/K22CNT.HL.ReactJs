@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-
+import '../form.css'
 export default function NtkUserAdd() {
     const ntk_api = "https://68d359e0214be68f8c6588b2.mockapi.io/k22cnt_NguyenTrucKien_2210900033/user";
      const [form, setForm] = useState({
@@ -32,44 +32,44 @@ export default function NtkUserAdd() {
     }
 
   return (
-    <div>
-        <h2>Thêm mới user</h2>
-        <form onSubmit={handleSubmit}>
-            <div>
-                Fullname:
-                <input
+    <div className="form-container">
+    <h2>Thêm user</h2>
+    <form onSubmit={handleSubmit}>
+        <div className="form-group">
+            <label>Fullname:</label>
+            <input
                 name="fullname"
                 value={form.fullname}
                 onChange={handleChange}
-                />
-            </div>
-            <div>
-                UserName:
-                <input
+            />
+        </div>
+        <div className="form-group">
+            <label>Username:</label>
+            <input
                 name="username"
                 value={form.username}
                 onChange={handleChange}
-                />
-            </div>
-            <div>
-                Password:
-                <input
+            />
+        </div>
+        <div className="form-group">
+            <label>Password:</label>
+            <input
                 type="password"
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                />
-            </div>
-            <div>
-                Status:
-                <input
+            />
+        </div>
+        <div className="form-group">
+            <label>Status:</label>
+            <input
                 name="status"
                 value={form.status}
                 onChange={handleChange}
-                />
-            </div>
-            <button type="submit">Thêm User</button>
-            </form>
+            />
+        </div>
+        <button type="submit" className="btn-submit">Thêm User</button>
+    </form>
     </div>
   )
 }
