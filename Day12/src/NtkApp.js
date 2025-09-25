@@ -9,11 +9,13 @@ import NtkUsers from './pages/NtkUsers';
 import NtkUserAdd from './pages/NtkUserAdd';
 import NtkUserEdit from './pages/NtkUserEdit';
 import NtkCar from './pages/NtkCar';
+import NtkCarAdd from './pages/NtkCarAdd';
+import NtkCarEdit from './pages/NtkCarEdit';
 
 export default function NtkApp() {
   return (
     <div className="container border">
-      <h1>React router - Demo [Nguyễn Trực Kiên]</h1>
+      <h1 className='text-center'>Thư viện xe [Nguyễn Trực Kiên]</h1>
       <hr/>
       <BrowserRouter>
         <NtkNavBar/>
@@ -21,21 +23,18 @@ export default function NtkApp() {
           <Route path='/' element={<NtkHome />}/>
           <Route path='/about' element={<NtkAbout />}/>
           <Route path='/contact' element={<NtkContact/>}/>
-          
 
-          {/* Nested route */}
-          <Route path='/car' element={<NtkCar/>}>
-            
-          </Route>
-
-          <Route path='/users' element={<NtkUsers/>}> </Route>
+          <Route path='/users' element={<NtkUsers/>}/>
           <Route path="/users/add" element={<NtkUserAdd/>}/>
           <Route path="/users/edit/:id" element={<NtkUserEdit/>}/>
 
 
+          <Route path='/car' element={<NtkCar/>}/>
+          <Route path='/car/add' element={<NtkCarAdd/>}/>
+          <Route path='/car/edit/:id' element={<NtkCarEdit/>}/>
+          
           {/* 404 page */}
-          <Route path='*' element={<Ntk404 />}/>
-        </Routes>
+          <Route path='*' element={<Ntk404 />}/></Routes>
       </BrowserRouter>
     </div>
   );

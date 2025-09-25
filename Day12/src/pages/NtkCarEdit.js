@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import '../form.css'
-export default function NtkCarAdd() {
+import { useNavigate, useParams } from 'react-router-dom';
+export default function NtkCarEdit() {
+    const navigate = useNavigate();
     const ntk_api = "https://68d359e0214be68f8c6588b2.mockapi.io/k22cnt_NguyenTrucKien_2210900033/cars";
+
+    const { id } = useParams(); 
+
      const [form, setForm] = useState({
         tenxe: "",
         namsx: "",
@@ -11,6 +16,24 @@ export default function NtkCarAdd() {
         tocdo: "",
         dongco: "",
     });
+
+    useEffect(()=>{
+        axios
+        .get(ntk_api+`${id}`)
+        .then((res)=>{
+            setForm({
+                tenxe: res.data.tenxe || "",
+                namsx: res.data.namsx || "",
+                hang: res.data.hang || "",
+                gia: res.data.gia || "",
+                tocdo: res.data.tocdo || "",
+                dongco: res.data.dongco || "",
+            });
+        })
+        .catch((err)=>{
+            console.error("Lỗi khi load car:", err); 
+        });
+    },[id])
 
     const handleChange = (e) => {
         setForm({
@@ -23,10 +46,11 @@ export default function NtkCarAdd() {
         e.preventDefault();
 
         axios
-        .post(ntk_api, form)
+        .put(ntk_api + `${id}`, form)
         .then((res) => {
-            alert("Thêm xe thành công!");
+            alert("Cập nhật xe thành công!");
             console.log("Xe vừa thêm:", res.data);
+            navigate("/car"); // Quay lại danh sách users
         })
         .catch((err) => {
             console.error("Lỗi khi thêm xe:", err);
@@ -85,7 +109,7 @@ export default function NtkCarAdd() {
                 onChange={handleChange}
             />
         </div>
-        <button type="submit" className="btn-submit">Thêm xe</button>
+        <button type="submit" className="btn-submit">Sửa</button>
     </form>
     </div>
   )

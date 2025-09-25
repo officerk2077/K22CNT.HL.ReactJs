@@ -22,7 +22,7 @@ export default function NtkUser() {
             })
     }, [])
 
-    if (loading) return <p>Đang tải dữ liệu...</p>
+    if (loading) return <h1>Đang tải dữ liệu...</h1>
 
     // render data
     let renderUsers = userList.map((item, index) => (
@@ -34,7 +34,6 @@ export default function NtkUser() {
             <td>{item.status}</td>
             <td>
                 <Link to={`/users/edit/${item.id}`} className="btn btn-success me-2">Edit</Link>
-                <a href='/users/add' className='btn btn-primary me-2'>Thêm mới</a>
                 <button onClick={() => handleDelete(item.id)} className="btn btn-danger">Xoá</button>
             </td>
         </tr>
@@ -56,9 +55,9 @@ export default function NtkUser() {
     }
     return ( 
         <div>
-            <h2>Danh sách users</h2>
+            <h2 className='alert alert-dark'>Danh sách users</h2>
             <hr />
-            <table className='table table-bordered'>
+            <table className='table table-bordered text-center'>
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -66,13 +65,25 @@ export default function NtkUser() {
                         <th>Username</th>
                         <th>Password</th>
                         <th>Status</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
                     {renderUsers}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colSpan="8" className="text-center">
+                            <Link to='/car/add' className="btn btn-primary rounded-pill px-4">Thêm xe</Link>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
-            
         </div>
     )
 }
