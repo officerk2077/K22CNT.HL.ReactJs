@@ -33,16 +33,28 @@ export default function NtkUser() {
             <td>{item.password}</td>
             <td>{item.status}</td>
             <td>
-                <Link to={`/users/edit/${item.id}`} className="btn btn-success me-2">
-                        Edit
-                </Link>
-                <a href='/users/add' className='btn btn-primary'>Thêm mới</a>
+                <Link to={`/users/edit/${item.id}`} className="btn btn-success me-2">Edit</Link>
+                <a href='/users/add' className='btn btn-primary me-2'>Thêm mới</a>
+                <button onClick={() => handleDelete(item.id)} className="btn btn-danger">Xoá</button>
             </td>
-            
         </tr>
     ))
-
-    return (
+    // xoá data
+    const handleDelete = (id) => {
+        if (window.confirm("Bạn có chắc muốn xoá không?")) {
+            axios
+            .delete(`${ntk_api}/${id}`)
+            .then(()=>{
+                //cap nhat danh sach sau khi xoa
+                setUserList(userList.filter((u) => u.id !== id))
+            })
+            .catch((error)=>{
+                console.error("co loi khi xoa:", error);
+                
+            })
+        }
+    }
+    return ( 
         <div>
             <h2>Danh sách users</h2>
             <hr />
@@ -54,7 +66,6 @@ export default function NtkUser() {
                         <th>Username</th>
                         <th>Password</th>
                         <th>Status</th>
-                        {/* <th>CRUD</th> */}
                     </tr>
                 </thead>
                 <tbody>

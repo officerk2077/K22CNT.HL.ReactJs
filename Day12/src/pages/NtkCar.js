@@ -29,6 +29,14 @@ export default function NtkCar() {
         setCar([...car, form]);
         setForm({maxe: "", tenxe: "", namsx: "", hang: "", gia: "", tocdo: "", dongco: ""});
     };
+
+    const handleDelete = (index) => {
+    if (window.confirm("Bạn có chắc muốn xoá xe này không?")) {
+      const newCarList = [...car];
+      newCarList.splice(index, 1);
+      setCar(newCarList);
+    }
+  };
   return (
     <div>
       <h2 className='text-center alert alert-success'>Danh sách xe</h2>
@@ -57,23 +65,99 @@ export default function NtkCar() {
                         <td>{xe.tocdo}</td>
                         <td>{xe.dongco}</td>
                         <td className='text-center'>
-                          <a className='btn btn-success me-2'>Add</a>
-                          <a className='btn btn-primary'>Edit</a>
+                          <a className='btn btn-primary me-2'>Detail</a>
+                          <a className='btn btn-warning me-2'>Add</a>
+                          <a className='btn btn-success me-2'>Edit</a>
+                          <button className='btn btn-danger' onClick={() => handleDelete(index)}>Del</button>
                         </td>
                     </tr>
                 ))}
             </tbody>
         </table>
         <h3 className='text-center alert alert-danger' name='addForm'>Thêm mới xe</h3>
-        <form onSubmit={handleSubmit}>
-            <input name='maxe' placeholder='Mã xe' value={form.maxe} onChange={handleChange}/> <br/>
-            <input name='tenxe' placeholder='Tên xe' value={form.tenxe} onChange={handleChange}/> <br/>
-            <input name='namsx' placeholder='Năm sản xuất' value={form.namsx} onChange={handleChange}/> <br/>
-            <input name='hang' placeholder='Hãng' value={form.hang} onChange={handleChange}/> <br/>
-            <input name='gia' placeholder='Giá' value={form.gia} onChange={handleChange}/> <br/>
-            <input name='tocdo' placeholder='Tốc độ tối đa' value={form.tocdo} onChange={handleChange}/> <br/>
-            <input name='dongco' placeholder='Động cơ' value={form.dongco} onChange={handleChange}/> <br/>
-            <button type="submit" className='btn btn-primary'>Thêm</button>
+        <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-light">
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Mã xe</label>
+                <input 
+                  name="maxe" 
+                  placeholder="Mã xe" 
+                  value={form.maxe} 
+                  onChange={handleChange} 
+                  className="form-control"
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Tên xe</label>
+                <input 
+                  name="tenxe" 
+                  placeholder="Tên xe" 
+                  value={form.tenxe} 
+                  onChange={handleChange} 
+                  className="form-control"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Năm sản xuất</label>
+                <input 
+                  type="number"
+                  name="namsx" 
+                  placeholder="Năm sản xuất" 
+                  value={form.namsx} 
+                  onChange={handleChange} 
+                  className="form-control"
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Hãng</label>
+                <input 
+                  name="hang" 
+                  placeholder="Hãng" 
+                  value={form.hang} 
+                  onChange={handleChange} 
+                  className="form-control"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Giá</label>
+                <input 
+                  name="gia" 
+                  placeholder="Giá" 
+                  value={form.gia} 
+                  onChange={handleChange} 
+                  className="form-control"
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Tốc độ tối đa</label>
+                <input 
+                  name="tocdo" 
+                  placeholder="Tốc độ tối đa" 
+                  value={form.tocdo} 
+                  onChange={handleChange} 
+                  className="form-control"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 mb-3">
+                <label className="form-label">Động cơ</label>
+                <input 
+                  name="dongco" 
+                  placeholder="Động cơ" 
+                  value={form.dongco} 
+                  onChange={handleChange} 
+                  className="form-control"
+                />
+              </div>
+            </div>
+            <div className='text-center'>
+              <button type="submit" className="btn btn-primary w-50">Thêm</button>
+            </div>
         </form>
     </div>
   )
