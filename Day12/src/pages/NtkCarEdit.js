@@ -2,115 +2,126 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import '../form.css'
 import { useNavigate, useParams } from 'react-router-dom';
+
 export default function NtkCarEdit() {
-    const navigate = useNavigate();
-    const ntk_api = "https://68d359e0214be68f8c6588b2.mockapi.io/k22cnt_NguyenTrucKien_2210900033/cars";
+  const navigate = useNavigate();
+  const ntk_api = "https://68d359e0214be68f8c6588b2.mockapi.io/k22cnt_NguyenTrucKien_2210900033/cars";
 
-    const { id } = useParams(); 
+  const { id } = useParams(); 
 
-     const [form, setForm] = useState({
-        tenxe: "",
-        namsx: "",
-        hang: "",
-        gia: "",
-        tocdo: "",
-        dongco: "",
-    });
+  const [form, setForm] = useState({
+    tenxe: "",
+    namsx: "",
+    hang: "",
+    gia: "",
+    tocdo: "",
+    dongco: "",
+    image: "",
+  });
 
-    useEffect(()=>{
-        axios
-        .get(ntk_api+`${id}`)
-        .then((res)=>{
-            setForm({
-                tenxe: res.data.tenxe || "",
-                namsx: res.data.namsx || "",
-                hang: res.data.hang || "",
-                gia: res.data.gia || "",
-                tocdo: res.data.tocdo || "",
-                dongco: res.data.dongco || "",
-            });
-        })
-        .catch((err)=>{
-            console.error("Lỗi khi load car:", err); 
-        });
-    },[id])
-
-    const handleChange = (e) => {
+  useEffect(() => {
+    axios
+      .get(`${ntk_api}/${id}`)
+      .then((res) => {
         setForm({
-            ...form,
-            [e.target.name]: e.target.value,
+          tenxe: res.data.tenxe || "",
+          namsx: res.data.namsx || "",
+          hang: res.data.hang || "",
+          gia: res.data.gia || "",
+          tocdo: res.data.tocdo || "",
+          dongco: res.data.dongco || "",
+          image: res.data.image || "",
         });
-    }
+      })
+      .catch((err) => {
+        console.error("Lỗi khi load car:", err);
+      });
+  }, [id]);
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  }
 
-        axios
-        .put(ntk_api + `${id}`, form)
-        .then((res) => {
-            alert("Cập nhật xe thành công!");
-            console.log("Xe vừa thêm:", res.data);
-            navigate("/car"); // Quay lại danh sách users
-        })
-        .catch((err) => {
-            console.error("Lỗi khi thêm xe:", err);
-        });
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .put(`${ntk_api}/${id}`, form)
+      .then((res) => {
+        alert("Cập nhật xe thành công!");
+        console.log("Xe vừa cập nhật:", res.data);
+        navigate("/car");
+      })
+      .catch((err) => {
+        console.error("Lỗi khi cập nhật xe:", err);
+      });
+  }
 
   return (
     <div className="form-container">
-    <h2>Thêm xe</h2>
-    <form onSubmit={handleSubmit}>
+      <h2>Sửa xe</h2>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-            <label>Tên xe:</label>
-            <input
-                name="tenxe"
-                value={form.tenxe}
-                onChange={handleChange}
-            />
+          <label>Tên xe:</label>
+          <input
+            name="tenxe"
+            value={form.tenxe}
+            onChange={handleChange}
+          />
         </div>
         <div className="form-group">
-            <label>Năm sản xuất:</label>
-            <input
-                name="namsx"
-                value={form.namsx}
-                onChange={handleChange}
-            />
+          <label>Năm sản xuất:</label>
+          <input
+            name="namsx"
+            value={form.namsx}
+            onChange={handleChange}
+          />
         </div>
         <div className="form-group">
-            <label>Hãng:</label>
-            <input
-                name="hang"
-                value={form.hang}
-                onChange={handleChange}
-            />
+          <label>Hãng:</label>
+          <input
+            name="hang"
+            value={form.hang}
+            onChange={handleChange}
+          />
         </div>
         <div className="form-group">
-            <label>Giá</label>
-            <input
-                name="gia"
-                value={form.gia}
-                onChange={handleChange}
-            />
+          <label>Giá:</label>
+          <input
+            name="gia"
+            value={form.gia}
+            onChange={handleChange}
+          />
         </div>
         <div className="form-group">
-            <label>Tốc độ tối đa</label>
-            <input
-                name="tocdo"
-                value={form.tocdo}
-                onChange={handleChange}
-            />
+          <label>Tốc độ tối đa:</label>
+          <input
+            name="tocdo"
+            value={form.tocdo}
+            onChange={handleChange}
+          />
         </div>
         <div className="form-group">
-            <label>Động cơ</label>
-            <input
-                name="dongco"
-                value={form.dongco}
-                onChange={handleChange}
-            />
+          <label>Động cơ:</label>
+          <input
+            name="dongco"
+            value={form.dongco}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Hình ảnh:</label>
+          <input
+            name="image"
+            value={form.image}
+            onChange={handleChange}
+          />
         </div>
         <button type="submit" className="btn-submit">Sửa</button>
-    </form>
+      </form>
     </div>
   )
 }

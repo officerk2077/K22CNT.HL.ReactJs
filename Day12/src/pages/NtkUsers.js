@@ -44,7 +44,6 @@ export default function NtkUser() {
             axios
             .delete(`${ntk_api}/${id}`)
             .then(()=>{
-                //cap nhat danh sach sau khi xoa
                 setUserList(userList.filter((u) => u.id !== id))
             })
             .catch((error)=>{
@@ -79,7 +78,7 @@ export default function NtkUser() {
                         <td></td>
                         <td></td>
                         <td colSpan="8" className="text-center">
-                            <Link to='/car/add' className="btn btn-primary rounded-pill px-4">Thêm xe</Link>
+                            <Link to='/users/add' className="btn btn-primary rounded-pill px-4">Thêm User</Link>
                         </td>
                     </tr>
                 </tfoot>

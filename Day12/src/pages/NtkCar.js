@@ -30,7 +30,6 @@ export default function NtkCar() {
       axios
         .delete(`${ntk_api}/${id}`)
         .then(() => {
-          // cập nhật danh sách sau khi xóa
           setCarList(carList.filter((u) => u.id !== id))
         })
         .catch((error) => {
@@ -94,3 +93,4 @@ export default function NtkCar() {
     </div>
   )
 }
+

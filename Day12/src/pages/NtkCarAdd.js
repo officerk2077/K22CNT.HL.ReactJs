@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import '../form.css'
+import { useNavigate } from 'react-router-dom';
 export default function NtkCarAdd() {
+    const navigate = useNavigate();
     const ntk_api = "https://68d359e0214be68f8c6588b2.mockapi.io/k22cnt_NguyenTrucKien_2210900033/cars";
+
+    
      const [form, setForm] = useState({
         tenxe: "",
         namsx: "",
@@ -10,6 +14,7 @@ export default function NtkCarAdd() {
         gia: "",
         tocdo: "",
         dongco: "",
+        image: "",
     });
 
     const handleChange = (e) => {
@@ -27,6 +32,7 @@ export default function NtkCarAdd() {
         .then((res) => {
             alert("Thêm xe thành công!");
             console.log("Xe vừa thêm:", res.data);
+            navigate("/car");
         })
         .catch((err) => {
             console.error("Lỗi khi thêm xe:", err);
@@ -84,6 +90,14 @@ export default function NtkCarAdd() {
                 value={form.dongco}
                 onChange={handleChange}
             />
+        </div>
+        <div className="form-group">
+          <label>Hình ảnh (URL hoặc tên file trong /assets):</label>
+          <input
+            name="image"
+            value={form.image}
+            onChange={handleChange}
+          />
         </div>
         <button type="submit" className="btn-submit">Thêm xe</button>
     </form>

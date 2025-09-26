@@ -19,7 +19,6 @@ export default function NtkUserEdit() {
          axios
       .get(ntk_api+`${id}`)
       .then((res) => {
-        // Ở thực tế, API backend của bạn sẽ trả về đủ dữ liệu
         setForm({
           fullname: res.data.fullname || "",
           username: res.data.username || "",
@@ -47,7 +46,7 @@ export default function NtkUserEdit() {
         .then((res) => {
             alert("Cập nhật user thành công!");
             console.log("User vừa thêm:", res.data);
-            navigate("/users"); // Quay lại danh sách users
+            navigate("/users");
         })
         .catch((err) => {
             console.error("Lỗi khi thêm user:", err);
